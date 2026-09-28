@@ -3,7 +3,6 @@ export class DateUtils{
 
 
     //get todays date 
-//for not adding to git
     static getTodayDate()
     {
         const date = new Date();
