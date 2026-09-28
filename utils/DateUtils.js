@@ -3,7 +3,6 @@ export class DateUtils{
 
 
     //get todays date 
-
     static getTodayDate()
     {
         const date = new Date();
