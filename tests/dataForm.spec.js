@@ -17,7 +17,7 @@ test.describe("User Form Tests", ()=>
     // })
 
 
-    test("SIT:002 | Verify user form detils",async({page}) =>{
+    test("SIT:002 | Verify user form detils test",async({page}) =>{
        const date = DateUtils.getTodayDate();
        console.log("Todays Date >> ", date);
        console.log("previous date >>>",DateUtils.getPreviousDate(5));
