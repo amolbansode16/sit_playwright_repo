@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    // Values you type on the "Build with Parameters" page
+    parameters {
+        string(name: 'SPEC_FILE', defaultValue: '', description: 'Spec file to run, for example: tests/dataForm.spec.js. Leave empty to run all spec files.')
+        string(name: 'TAG', defaultValue: '', description: 'Tag to run, for example: @smoke or @regression. Leave empty to run all tags.')
+    }
+
+    environment {
+        // CI mode: 2 retries, 1 worker, test.only not allowed (see playwright.config.js)
+        CI = 'true'
+    }
+
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+    }
+
+    stages {
+        stage('Install') {
+            steps {
+                bat 'npm ci'
+                bat 'npx playwright install chromium'
+            }
+        }
+
+        stage('Clean old results') {
+            steps {
+                bat 'if exist allure-results rmdir /s /q allure-results'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                script {
+                    // Start with the basic command, then add the parameters that are filled in
+                    def command = 'npx playwright test'
+
+                    if (params.SPEC_FILE?.trim()) {
+                        command = command + " \"${params.SPEC_FILE.trim()}\""
+                    }
+
+                    if (params.TAG?.trim()) {
+                        command = command + " --grep \"${params.TAG.trim()}\""
+                    }
+
+                    echo "Running command : ${command}"
+                    bat command
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Playwright HTML report as a downloadable artifact
+            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+
+            // Allure report (needs the Allure Jenkins plugin)
+            allure includeProperties: false, results: [[path: 'allure-results']]
+        }
+    }
+}
