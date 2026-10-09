@@ -20,7 +20,7 @@ test.describe("User Form Tests", ()=>
     // })
 
 
-    test("SIT:002 | Verify product list API",async({request}) =>{
+    test("SIT:002 | Verify product list API", { tag: ["@smoke", "@regression"] }, async({request}) =>{
         LogUtils.testStart("SIT:002");
 
         // Step 1 : Send GET request
@@ -43,7 +43,7 @@ test.describe("User Form Tests", ()=>
     })
 
 
-    test("SIT:003 | Verify single product API",async({request}) =>{
+    test("SIT:003 | Verify single product API", { tag: ["@smoke", "@regression"] }, async({request}) =>{
         LogUtils.testStart("SIT:003");
 
         // Step 1 : Send GET request
@@ -63,7 +63,7 @@ test.describe("User Form Tests", ()=>
     })
 
 
-    test("SIT:004 | Verify create product API",async({request}) =>{
+    test("SIT:004 | Verify create product API", { tag: ["@regression"] }, async({request}) =>{
         LogUtils.testStart("SIT:004");
 
         // Step 1 : Send POST request with product from test data
@@ -85,7 +85,7 @@ test.describe("User Form Tests", ()=>
     })
 
 
-    test("SIT:005 | Update product using PUT",async({request}) =>{
+    test("SIT:005 | Update product using PUT", { tag: ["@regression"] }, async({request}) =>{
         LogUtils.testStart("SIT:005");
 
         // Step 1 : Send PUT request with product from test data
