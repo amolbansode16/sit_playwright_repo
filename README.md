@@ -261,7 +261,7 @@ flowchart LR
 | All tests | `npm test` | Runs every spec file in `tests/` |
 | One file | `npx playwright test tests/dataForm.spec.js` | Runs only that file |
 | One test by name | `npx playwright test -g "SIT:004"` | Runs tests whose title contains `SIT:004` |
-| By tag | `npx playwright test --grep @smoke` | Runs tests tagged `@smoke`. 📝 No tests have tags yet. |
+| By tag | `npx playwright test --grep "@smoke"` | Runs tests tagged `@smoke` (SIT:002, SIT:003). `@regression` runs SIT:002–005. |
 | Specific browser | `npx playwright test --project=chromium` | Only `chromium` is set up |
 | Headed mode | `npx playwright test --headed` | Shows the browser window (UI tests only) |
 | Debug mode | `npx playwright test --debug` | Opens Playwright Inspector to step through |
@@ -401,7 +401,7 @@ flowchart LR
 
 ### Jenkins
 
-The `Jenkinsfile` in the project root runs the tests on a Windows Jenkins agent.
+The `Jenkinsfile` in the project root runs the tests on a Windows Jenkins agent. New to Jenkins? Read the beginner guide: [docs/Jenkins-Guide.md](docs/Jenkins-Guide.md).
 
 | Stage | What it does |
 |---|---|
